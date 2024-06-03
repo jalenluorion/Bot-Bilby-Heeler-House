@@ -24,6 +24,8 @@ const events = new EventManager();
 const services = getServices(client, commands);
 
 process.on("uncaughtException", async (error, origin) => {
+    if (error.message === "This operation was aborted") return;
+    
     // Bilby has crashed at this point, best we can do is log the errors and exit.
     logger.error("Detected an uncaught exception with origin", origin, ".\n",error.message,"\n",error.stack);
 
